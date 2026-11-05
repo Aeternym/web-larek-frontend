@@ -19,6 +19,8 @@ const config = {
   devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
+    publicPath: process.env.PUBLIC_PATH || "/",
+    clean: true,
   },
   devServer: {
     open: true,

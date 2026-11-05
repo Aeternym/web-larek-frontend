@@ -21,6 +21,22 @@ npm run start
 
 Для production-сборки: `npm run build`. Проверка стиля кода: `npm run lint`.
 
+## Публикация на GitHub Pages
+
+Адрес демо после успешного деплоя: https://aeternym.github.io/web-larek-frontend/
+
+Workflow `.github/workflows/pages.yml` собирает проект из `main` через `npm ci` и `npm run build`, затем публикует содержимое `dist`. Сборка использует `PUBLIC_PATH=/web-larek-frontend/` и публичный учебный API `API_ORIGIN=https://larek-api.nomoreparties.co`. Это адрес сервера, а не секрет. Доступность каталога зависит от учебного API.
+
+Однократная настройка репозитория:
+
+1. Открыть **Settings → Pages → Build and deployment → Source** и выбрать **GitHub Actions**.
+2. Открыть **Actions → Build and deploy to GitHub Pages → Run workflow**, выбрать `main` и запустить workflow.
+3. Дождаться успешных заданий `build` и `deploy`, затем открыть адрес демо.
+
+Отдельная ветка `gh-pages` для этого workflow не нужна. Следующие изменения в `main` публикуются автоматически. Старый `npm run deploy` использует другой способ публикации через ветку и для этого workflow не требуется.
+
+Для локального запуска задайте `API_ORIGIN=https://larek-api.nomoreparties.co` в `.env`; для локальной production-сборки — в `.env.production` или переменной окружения. Без адреса API каталог не загрузится. Статические файлы из `src/public` копируются в `dist` при production-сборке.
+
 **Учебный контекст:** проект закрепляет типизацию данных, декомпозицию SPA на компоненты, работу с API, управление событиями и проектирование UI. [Программа Яндекс Практикума — «Фронтенд-разработчик»](https://practicum.yandex.ru/frontend-developer/).
 
 *Приложение разработано для обучения и использует учебный сервер.*
